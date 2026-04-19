@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, make_response
-from backend.db_connection import db
+from backend.db_connection import get_db
 
 recruiters = Blueprint('recruiters', __name__)
 
@@ -13,7 +13,7 @@ def create_listing():
     if missing:
         return make_response(jsonify({'error': f'Missing fields: {missing}'}), 400)
 
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     cursor.execute(
         '''
         INSERT INTO Listings
@@ -31,7 +31,7 @@ def create_listing():
             data['cycleId'],
         )
     )
-    db.get_db().commit()
+    get_db().commit()
     return make_response(
         jsonify({'message': 'Listing created', 'listingId': cursor.lastrowid}), 201
     )
@@ -40,7 +40,7 @@ def create_listing():
 @recruiters.route('/listings/<int:listing_id>', methods=['PUT'])
 def update_listing(listing_id):
     data = request.get_json()
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     cursor.execute(
         '''
         UPDATE Listings
@@ -60,15 +60,15 @@ def update_listing(listing_id):
             listing_id,
         )
     )
-    db.get_db().commit()
+    get_db().commit()
     return make_response(jsonify({'message': 'Listing updated'}), 200)
 
 
 @recruiters.route('/listings/<int:listing_id>', methods=['DELETE'])
 def delete_listing(listing_id):
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     cursor.execute('DELETE FROM Listings WHERE listingId = %s', (listing_id,))
-    db.get_db().commit()
+    get_db().commit()
     return make_response(jsonify({'message': 'Listing deleted'}), 200)
 
 
@@ -96,7 +96,7 @@ def get_listing_applications(listing_id):
 
     query += ' ORDER BY a.deadline ASC'
 
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     cursor.execute(query, tuple(params))
     return make_response(jsonify(cursor.fetchall()), 200)
 
@@ -112,12 +112,12 @@ def update_application_status(application_id):
             jsonify({'error': f'status must be one of {allowed}'}), 400
         )
 
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     cursor.execute(
         'UPDATE Applications SET status = %s WHERE applicationId = %s',
         (new_status, application_id)
     )
-    db.get_db().commit()
+    get_db().commit()
     return make_response(jsonify({'message': 'Application status updated'}), 200)
 
 
@@ -130,7 +130,7 @@ def create_interview():
     if missing:
         return make_response(jsonify({'error': f'Missing fields: {missing}'}), 400)
 
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     cursor.execute(
         '''
         INSERT INTO Interviews
@@ -148,7 +148,7 @@ def create_interview():
             data['companyId'],
         )
     )
-    db.get_db().commit()
+    get_db().commit()
     return make_response(
         jsonify({'message': 'Interview scheduled', 'interviewId': cursor.lastrowid}), 201
     )
@@ -156,7 +156,7 @@ def create_interview():
 
 @recruiters.route('/companies/<int:company_id>/alumni', methods=['GET'])
 def get_opted_in_alumni(company_id):
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     cursor.execute(
         '''
         SELECT s.firstName,
@@ -182,7 +182,7 @@ def get_opted_in_alumni(company_id):
 
 @recruiters.route('/companies/<int:company_id>/analytics', methods=['GET'])
 def get_hiring_analytics(company_id):
-    cursor = db.get_db().cursor()
+    cursor = get_db().cursor()
     cursor.execute(
         '''
         SELECT l.positionTitle,
