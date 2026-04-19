@@ -7,7 +7,7 @@ from backend.db_connection import init_app as init_db
 from backend.simple.simple_routes import simple_routes
 from backend.ngos.ngo_routes import ngos
 from backend.students.student_routes import students 
-
+from backend.recruiter.recruiter_routes import recruiters
 
 def create_app():
     app = Flask(__name__)
@@ -39,5 +39,6 @@ def create_app():
     app.register_blueprint(simple_routes)
     app.register_blueprint(ngos, url_prefix="/ngo")
     app.register_blueprint(students, url_prefix="/s") 
+    app.register_blueprint(recruiters, url_prefix='/recruiters')
 
     return app
