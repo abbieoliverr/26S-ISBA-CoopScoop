@@ -80,3 +80,12 @@ if st.button('Act as Thiago Goat, a Recruiter',
     st.session_state['recruiter_id'] = 1
     st.session_state['company_id'] = 1
     st.switch_page('pages/40_Recruiter_Home.py')
+
+if st.button('Act as Fawn Font, a Student',
+             type='primary',
+             use_container_width=True):
+    st.session_state['authenticated'] = True
+    st.session_state['role'] = 'student'
+    st.session_state['first_name'] = 'Fawn'
+    st.session_state['student_id'] = 1
+    st.switch_page('pages/50_Student_Home.py') 
