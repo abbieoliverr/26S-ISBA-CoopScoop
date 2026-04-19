@@ -76,6 +76,34 @@ def ml_model_mgmt_nav():
         "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
     )
 
+# ---- Role: recruiter --------------------------------------------------------
+
+def recruiter_home_nav():
+    st.sidebar.page_link("pages/40_Recruiter_Home.py", label="Recruiter Home", icon="💼")
+
+def post_listing_nav():
+    st.sidebar.page_link("pages/41_Post_Listing.py", label="Post Listing", icon="➕")
+
+def manage_applicants_nav():
+    st.sidebar.page_link("pages/42_Manage_Applicants.py", label="Manage Applicants", icon="👥")
+
+def hiring_analytics_nav():
+    st.sidebar.page_link("pages/43_Hiring_Analytics.py", label="Hiring Analytics", icon="📊")
+
+
+# ---- Role: student ----------------------------------------------------------
+
+def student_home_nav():
+    st.sidebar.page_link("pages/50_Student_Home.py", label="Student Home", icon="🎓")
+
+def student_reviews_nav():
+    st.sidebar.page_link("pages/52_Student_Rev.py", label="Browse Reviews", icon="⭐")
+
+def student_apps_nav():
+    st.sidebar.page_link("pages/51_student_apps.py", label="My Applications", icon="📋")
+
+def student_listings_nav():
+    st.sidebar.page_link("pages/53_student_listing.py", label="Browse Listings", icon="🔍")
 
 # ---- Sidebar assembly -------------------------------------------------------
 
@@ -115,6 +143,18 @@ def SideBarLinks(show_home=False):
             admin_home_nav()
             ml_model_mgmt_nav()
 
+        if st.session_state["role"] == "recruiter":
+            recruiter_home_nav()
+            post_listing_nav()
+            manage_applicants_nav()
+            hiring_analytics_nav()
+
+        if st.session_state["role"] == "student":
+            student_home_nav()
+            student_reviews_nav()
+            student_apps_nav()
+            student_listings_nav()
+
     # About link appears at the bottom for all roles
     about_page_nav()
 
@@ -123,3 +163,4 @@ def SideBarLinks(show_home=False):
             del st.session_state["role"]
             del st.session_state["authenticated"]
             st.switch_page("Home.py")
+
