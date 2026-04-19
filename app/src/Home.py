@@ -70,3 +70,13 @@ if st.button('Act as System Administrator',
     st.session_state['role'] = 'administrator'
     st.session_state['first_name'] = 'SysAdmin'
     st.switch_page('pages/20_Admin_Home.py')
+
+if st.button('Act as Thiago Goat, a Recruiter',
+             type='primary',
+             use_container_width=True):
+    st.session_state['authenticated'] = True
+    st.session_state['role'] = 'recruiter'
+    st.session_state['first_name'] = 'Thiago'
+    st.session_state['recruiter_id'] = 1
+    st.session_state['company_id'] = 1
+    st.switch_page('pages/40_Recruiter_Home.py')
