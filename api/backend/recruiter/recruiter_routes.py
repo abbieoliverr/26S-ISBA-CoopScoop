@@ -67,6 +67,7 @@ def update_listing(listing_id):
 @recruiters.route('/listings/<int:listing_id>', methods=['DELETE'])
 def delete_listing(listing_id):
     cursor = get_db().cursor()
+    cursor.execute('DELETE FROM Applications WHERE listingId = %s', (listing_id,))
     cursor.execute('DELETE FROM Listings WHERE listingId = %s', (listing_id,))
     get_db().commit()
     return make_response(jsonify({'message': 'Listing deleted'}), 200)

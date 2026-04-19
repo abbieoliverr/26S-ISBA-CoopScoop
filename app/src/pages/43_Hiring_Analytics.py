@@ -18,9 +18,10 @@ if response.status_code == 200:
     data = response.json()
     if data:
         df = pd.DataFrame(data)
+        df.columns = [col.lower() for col in df.columns]
 
-        total_applicants = df['totalApplicants'].sum()
-        total_offers = df['totalOffers'].sum()
+        total_applicants = df['totalapplicants'].sum()
+        total_offers = df['totaloffers'].sum()
         overall_rate = round((total_offers / total_applicants * 100), 1) if total_applicants > 0 else 0
         active_positions = len(df)
 
@@ -33,12 +34,12 @@ if response.status_code == 200:
         st.divider()
 
         st.subheader('Applicants Per Position')
-        st.bar_chart(df.set_index('positionTitle')['totalApplicants'])
+        st.bar_chart(df.set_index('positiontitle')['totalapplicants'])
 
         st.subheader('Pipeline Breakdown')
         st.dataframe(
-            df[['positionTitle', 'totalApplicants', 'inInterview',
-                'totalOffers', 'totalRejected', 'acceptanceRatePct', 'avgDaysToInterview']],
+            df[['positiontitle', 'totalapplicants', 'ininterview',
+                'totaloffers', 'totalrejected', 'acceptanceratepct', 'avgdaystointerview']],
             use_container_width=True
         )
     else:
