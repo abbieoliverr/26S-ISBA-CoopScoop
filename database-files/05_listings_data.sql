@@ -1,3 +1,5 @@
+USE `Coop-Scoop`;
+
 insert into Listings (positionTitle, description, skillsRequired, location, salary, companyId, cycleId) values ('Software Engineer Co-op', 'Collaborate with the core platform team to build scalable microservices.', 'Python, Docker, REST APIs', 'Boston, MA', 32, 1, 1);
 insert into Listings (positionTitle, description, skillsRequired, location, salary, companyId, cycleId) values ('Data Analyst Co-op', 'Support the analytics team in building dashboards and ad hoc reports.', 'SQL, Tableau, Excel', 'Cambridge, MA', 26, 1, 1);
 insert into Listings (positionTitle, description, skillsRequired, location, salary, companyId, cycleId) values ('Frontend Developer Co-op', 'Implement new UI features for the customer portal using React.', 'React, TypeScript, CSS', 'Boston, MA', 29, 1, 1);

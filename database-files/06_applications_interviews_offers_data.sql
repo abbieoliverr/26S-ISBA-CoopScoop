@@ -1,3 +1,5 @@
+USE `Coop-Scoop`;
+
 insert into Applications (status, deadline, listingId, studentId) values ('Pending', '2026-02-14', 3, 2);
 insert into Applications (status, deadline, listingId, studentId) values ('Interviewing', '2026-01-30', 17, 1);
 insert into Applications (status, deadline, listingId, studentId) values ('Offered', '2026-03-08', 7, 2);
@@ -162,3 +164,57 @@ insert into Offers (finalSalary, acceptanceStatus, applicationId, studentId) val
 insert into Offers (finalSalary, acceptanceStatus, applicationId, studentId) values (26, 'Accepted', 16, 1);
 insert into Offers (finalSalary, acceptanceStatus, applicationId, studentId) values (29, 'Rejected', 20, 1);
 insert into Offers (finalSalary, acceptanceStatus, applicationId, studentId) values (31, 'Accepted', 24, 1);
+
+
+INSERT INTO InterviewHistory (position, question, companyId, interviewId, studentId)
+VALUES
+    ('Backend Engineering Co-op', 'mostly just sys design stuff. like how to scale a rate limiter? and then some basic sql questions.', 140, 36, 91),
+    ('Machine Learning Intern', 'something about l1 vs l2 regularization. forgot the second part lol', 53, NULL, 101),
+    ('Full Stack Developer', 'Leetcode Hard 477 (Total Hamming Distance). prepare for pain.', 130, NULL, 23),
+    ('Product Management Intern', 'They asked roadmap priority and success metrics. standard pm stuff.', 82, NULL, 7),
+    ('Mobile Dev Intern', '1. Swift vs Obj-C 2. screen sizes 3. iOS memory management', 102, NULL, 6),
+    ('Full Stack Developer', 'LC Hard 926. also asked about closures in js.', 129, 19, 17),
+    ('Cloud Engineer Co-op', 'scaling, Serverless, VPC. know your aws services!!', 150, NULL, 52),
+    ('QA Analyst', 'Regression vs Smoke testing / Bug life cycle / "How do you test a toaster?"', 108, 50, 53),
+    ('Machine Learning Intern', 'Bias-Variance tradeoff / Imbalanced data / Random Forest vs Boosting', 47, NULL, 34),
+    ('Backend Engineering Co-op', 'Explain process vs thread. then they made me write a hash map from scratch on a whiteboard.', 45, NULL, 69),
+    ('Software Engineering Intern', 'Leetcode 212 (Word Search II). actually insane for an intern role.', 129, 25, 41),
+    ('Cloud Engineer Co-op', 'why do you want to work here? / what is high availability? / name 3 cloud providers lol', 77, NULL, 102),
+    ('Cloud Engineer Co-op', 'Serverless | VPC | Security Groups', 113, NULL, 109),
+    ('Software Engineering Intern', 'standard technical: hash maps, threads vs processes, and "tell me about a challenge"', 71, NULL, 113),
+    ('Machine Learning Intern', 'gradient descent / regularization / bias-variance', 128, NULL, 51),
+    ('Machine Learning Intern', 'imbalanced data | vanishing gradient | dropout layers', 95, NULL, 65),
+    ('Frontend Developer', 'virtual dom vs real dom / css specificity / centering a div', 74, NULL, 62),
+    ('Mobile Dev Intern', 'They asked Activity lifecycle and screen sizes. pretty chill interview tbh.', 65, 27, 5),
+    ('Software Engineering Intern', 'rate limiter | db migrations | how to handle downtime', 4, NULL, 8),
+    ('Cloud Engineer Co-op', 'horizontal scaling vs vertical scaling. also why us?', 43, NULL, 48),
+    ('Machine Learning Intern', 'l1/l2, vanishing gradient, then we just talked about my projects.', 136, 25, 74),
+    ('Cloud Engineer Co-op', 'vpcs, subnets, and why serverless is "cool"', 50, NULL, 77),
+    ('QA Analyst', 'Regression testing | automation tools | what makes a good bug report?', 146, NULL, 80),
+    ('Frontend Developer', 'React stuff. Virtual DOM, closures, props vs state.', 35, NULL, 83),
+    ('Machine Learning Intern', '1. imbalanced data 2. Bias-Variance 3. project deep dive', 104, 13, 19),
+    ('Backend Engineering Co-op', 'LC Hard 945. i bombed it.', 64, NULL, 4),
+    ('Product Management Intern', '1. roadmap 2. design a vending machine for kids 3. metrics', 84, 46, 60),
+    ('Machine Learning Intern', 'bias-variance / l1 vs l2 / k-means vs knn', 107, NULL, 42),
+    ('Cloud Engineer Co-op', 'high availability / Serverless / VPC. very aws heavy.', 20, 47, 115),
+    ('Machine Learning Intern', 'vanishing gradient, Bias-Variance, and "do you have any questions for us?"', 32, NULL, 15),
+    ('Machine Learning Intern', 'vanishing gradient / overfitting / handle missing data', 93, NULL, 57),
+    ('Product Management Intern', 'how to prioritize features when engineering says no to everything.', 84, NULL, 13),
+    ('QA Analyst', '1. Regression vs Smoke 2. manual vs auto 3. favorite bug you found', 122, NULL, 111),
+    ('Mobile Dev Intern', 'LC Hard 546. why.', 38, NULL, 46),
+    ('Software Engineering Intern', 'sql vs nosql / rate limiting / "what happens when you type google.com into a browser?"', 39, 8, 92),
+    ('Product Management Intern', 'design a toaster for a blind person. then success metrics.', 53, NULL, 73),
+    ('Frontend Developer', 'performance stuff | Virtual DOM | lazy loading', 3, NULL, 16),
+    ('Frontend Developer', 'react hooks / virtual dom / css grid', 141, NULL, 32),
+    ('Machine Learning Intern', '1. L1 vs L2 2. Bias-Variance 3. explain your research', 1, 11, 61),
+    ('QA Analyst', '1. bug life cycle 2. how to write a test plan 3. regression', 34, 11, 78),
+    ('Mobile Dev Intern', '1. screen sizes 2. Activity lifecycle 3. intent vs bundle', 90, 47, 10),
+    ('Data Science Co-op', 'Bias-Variance, vanishing gradient, describe a time you failed.', 84, 4, 99),
+    ('Machine Learning Intern', 'vanishing gradient, handling imbalanced data, l1/l2', 92, 40, 82),
+    ('Frontend Developer', 'virtual dom / performance / "explain a closure like im 5"', 7, 40, 89),
+    ('Data Science Co-op', '1. vanishing gradient 2. data cleaning 3. sql joins', 26, NULL, 84),
+    ('Mobile Dev Intern', 'They asked about the Android Activity lifecycle and how to handle background tasks.', 15, 41, 66),
+    ('Data Science Co-op', 'LC Hard 530 (Minimum Absolute Difference in BST). weird for DS but okay.', 67, 49, 18),
+    ('Data Science Co-op', '1. L1 vs L2 2. vanishing gradient 3. precision vs recall', 79, NULL, 63),
+    ('Mobile Dev Intern', 'lifecycle | ios memory | objc vs swift. pretty standard.', 113, 48, 104),
+    ('Data Science Co-op', 'bias vs variance, explain p-values to a business person.', 54, NULL, 64);
