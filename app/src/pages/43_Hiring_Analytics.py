@@ -18,7 +18,7 @@ if response.status_code == 200:
     data = response.json()
     if data:
         df = pd.DataFrame(data)
-        df.columns = [col.lower() for col in df.columns]
+        df.columns = [str(col).lower() for col in df.columns]
 
         total_applicants = df['totalapplicants'].sum()
         total_offers = df['totaloffers'].sum()
