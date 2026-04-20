@@ -121,9 +121,16 @@ def set_current_cycle(cycle_id):
     db = get_db()
     cursor = db.cursor()
     try:
-        query = "UPDATE COOPCycle SET current = FALSE"
+        query = """
+                UPDATE COOPCycle 
+                SET current = FALSE
+                """
         cursor.execute(query)
-        query = "UPDATE COOPCycle SET current = TRUE WHERE cycleId = %s"
+        query = """
+                UPDATE COOPCycle 
+                SET current = TRUE 
+                WHERE cycleId = %s
+                """
         cursor.execute(query, (cycle_id,))
         db.commit()
         return jsonify({"message": "Updated current co-op cycle"}), 200
@@ -138,7 +145,11 @@ def get_cycles():
     db = get_db()
     cursor = db.cursor(dictionary=True)
     try:
-        query = "SELECT cycleId, name, current FROM COOPCycle ORDER BY cycleId DESC"
+        query = """
+                SELECT cycleId, name, current 
+                FROM COOPCycle 
+                ORDER BY cycleId DESC
+                """
         cursor.execute(query)
         cycles = cursor.fetchall()
         return jsonify(cycles), 200
@@ -153,11 +164,49 @@ def create():
     db = get_db()
     cursor = db.cursor()
     try:
-        query = "INSERT INTO COOPCycle (name, current) VALUES (%s, FALSE)"
+        query = """
+                INSERT INTO COOPCycle (name, current) 
+                VALUES (%s, FALSE)
+                """
         cursor.execute(query, (name,))
         db.commit()
         return jsonify({"message": f"Cycle created."}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+
+@admins.route("/reviews/pending", methods=["GET"])
+def get_pending_reviews():
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+    query = """
+        SELECT r.reviewId, c.companyName, s.firstName, s.lastName, 
+               r.rating, r.content, r.anonymous
+        FROM Reviews r
+        JOIN Companies c ON r.companyId = c.companyId
+        JOIN Students s ON r.studentId = s.studentId
+        WHERE r.approval = 'Pending'
+    """
+    cursor.execute(query)
+    pending = cursor.fetchall()
+    cursor.close()
+    return jsonify(pending), 200
+
+@admins.route("/reviews/<int:review_id>/status", methods=["PUT"])
+def update_review_status():
+    status = request.json.get('status')
+    reviewId = request.view_args['reviewId']
+    db = get_db()
+    cursor = db.cursor()
+    try:
+        query = """
+            UPDATE Reviews 
+            SET approval = %s 
+            WHERE reviewId = %s
+        """
+        cursor.execute(query, (status, reviewId))
+        db.commit()
+        return jsonify({"message": "Approval status updated"}), 200
     finally:
         cursor.close()
