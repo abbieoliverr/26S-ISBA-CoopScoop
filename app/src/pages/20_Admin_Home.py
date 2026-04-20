@@ -38,7 +38,7 @@ if st.button('View Reviews Pending Approval',
     st.switch_page('pages/25_Pending_Reviews.py')
 
 
-if st.button('View Updates Pending Approval',
+if st.button('Update Co-Op Cycle',
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/26_Pending_Updates.py')
+    st.switch_page('pages/26_Archive_Old.py')

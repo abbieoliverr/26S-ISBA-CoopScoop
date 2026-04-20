@@ -64,4 +64,4 @@ if response.status_code == 200:
         c6.write(r['userId'])
         c7.markdown(f":{a_color}[{r['accountStatus']}]")
 else:
-    st.error("Data unavailable.")
+    st.error("Failed to fetch data from API.")

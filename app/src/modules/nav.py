@@ -85,6 +85,9 @@ def review_log_nav():
 def pending_reviews_nav():
     st.sidebar.page_link("pages/25_Pending_Reviews.py", label="Pending Reviews", icon="⭐")
 
+def archive_old():
+    st.sidebar.page_link("pages/26_Archive_Old.py", label="Archive Data", icon="📁")
+
 
 # ---- Role: recruiter --------------------------------------------------------
 
@@ -182,7 +185,7 @@ def SideBarLinks(show_home=False):
             company_data_nav()
             review_log_nav()
             pending_reviews_nav()
-            pending_updates_nav()
+            archive_old()
 
         if st.session_state["role"] == "recruiter":
             recruiter_home_nav()

@@ -114,3 +114,50 @@ def get_review_logs():
         return jsonify({"error": str(e)}), 500
     finally:
         cursor.close()
+
+
+@admins.route("/coopcycle/<int:cycle_id>/makecurrent", methods=["PUT"])
+def set_current_cycle(cycle_id):
+    db = get_db()
+    cursor = db.cursor()
+    try:
+        query = "UPDATE COOPCycle SET current = FALSE"
+        cursor.execute(query)
+        query = "UPDATE COOPCycle SET current = TRUE WHERE cycleId = %s"
+        cursor.execute(query, (cycle_id,))
+        db.commit()
+        return jsonify({"message": "Updated current co-op cycle"}), 200
+    except Exception as e:
+        db.rollback()
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+
+@admins.route("/coopcycle", methods=["GET"])
+def get_cycles():
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+    try:
+        query = "SELECT cycleId, name, current FROM COOPCycle ORDER BY cycleId DESC"
+        cursor.execute(query)
+        cycles = cursor.fetchall()
+        return jsonify(cycles), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+
+@admins.route("/coopcycle", methods=["POST"])
+def create():
+    name = request.json.get('name')
+    db = get_db()
+    cursor = db.cursor()
+    try:
+        query = "INSERT INTO COOPCycle (name, current) VALUES (%s, FALSE)"
+        cursor.execute(query, (name,))
+        db.commit()
+        return jsonify({"message": f"Cycle created."}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
