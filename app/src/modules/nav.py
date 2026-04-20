@@ -77,7 +77,7 @@ def integrity_dashboard_nav():
     st.sidebar.page_link("pages/22_Integrity_Dashboard.py", label="Data Integrity Dashboard", icon="📊")
 
 def company_data_nav():
-    st.sidebar.page_link("pages/23_Company_Data.py", label="Company Data", icon="💼")
+    st.sidebar.page_link("pages/23_Company_Reviews.py", label="Company Review Data", icon="💼")
 
 def review_log_nav():
     st.sidebar.page_link("pages/24_Review_Log.py", label="Review Log", icon="➕")

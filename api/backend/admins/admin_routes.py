@@ -42,3 +42,48 @@ def update_user_status(userId):
         return jsonify({"error": str(e)}), 500
     finally:
         cursor.close()
+
+
+
+
+@admins.route("/reviews", methods=["GET"])
+def get_review_data():
+    cursor = get_db().cursor(dictionary=True)
+    try:
+        query = """
+        SELECT 
+            r.reviewId, r.content, r.rating, r.approval,
+            c.companyName, r.anonymous, s.firstName, s.lastName,
+            u.userId, u.accountStatus
+        FROM Reviews r
+        JOIN Companies c ON r.companyId = c.companyId
+        JOIN Students s ON r.studentId = s.studentId
+        JOIN Users u ON s.userId = u.userId
+        """
+        cursor.execute(query)
+        return jsonify(cursor.fetchall()), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()
+
+
+@admins.route("/reviews/sync", methods=["POST"])
+def sync_reviews():
+    db = get_db()
+    cursor = db.cursor()
+    try:
+        query = """
+                UPDATE Reviews r
+                    JOIN Students s ON r.studentId = s.studentId
+                    JOIN Users u ON s.userId = u.userId
+                SET r.approval = 'Rejected'
+                WHERE u.accountStatus = 'Suspended'
+                """
+        cursor.execute(query)
+        db.commit()
+        return jsonify({"message": f"Data synced."}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()

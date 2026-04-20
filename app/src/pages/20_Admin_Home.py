@@ -25,7 +25,7 @@ if st.button('View Data Integrity Dashboard',
 if st.button('View Company Data',
              type='primary',
              use_container_width=True):
-    st.switch_page('pages/23_Company_Data.py')
+    st.switch_page('pages/23_Company_Reviews.py')
 
 if st.button('View Review Log',
              type='primary',

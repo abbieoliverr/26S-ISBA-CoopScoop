@@ -47,9 +47,7 @@ def compare_offers():
             JOIN Companies c ON l.companyId = c.companyId
             LEFT JOIN Reviews r ON r.companyId = c.companyId
                                AND r.approval = 'Approved'
-            JOIN Users u ON r.userId = u.userId
             WHERE o.offerId IN (%s, %s)
-                AND u.accountStatus = 'Active'
             GROUP BY o.offerId, o.finalSalary, c.companyName, c.location
         """
         cursor.execute(query, (offer1, offer2))
@@ -76,9 +74,7 @@ def get_filtered_listings():
             JOIN Companies c ON l.companyId = c.companyId
             LEFT JOIN Reviews r ON r.companyId = c.companyId
                                AND r.approval = 'Approved'
-            JOIN Users u ON r.userId = u.userId
             WHERE l.salary >= %s
-                AND u.accountStatus = 'Active'
         """
         params = [min_salary]
  
@@ -194,10 +190,8 @@ def get_company_reviews(company_id):
             FROM Reviews r
             JOIN Students s ON r.studentId = s.studentId
             JOIN COOPCycle cc ON r.cycleId = cc.cycleId
-            JOIN Users u ON r.userId = u.userId
             WHERE r.companyId = %s
               AND r.approval = 'Approved'
-              AND u.accountStatus = 'Active'
             ORDER BY r.reviewId DESC
         """, (company_id,))
         return jsonify(cursor.fetchall()), 200
