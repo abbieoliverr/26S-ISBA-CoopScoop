@@ -9,7 +9,9 @@ st.write("# About this App")
 
 st.markdown(
     """
-    This is a demo app for Data and Software in International Government and Politics Dialogue 2025 Project Course.  
+    This is a demo app for CS3200 Final Project - Coop-Scoop.
+    It is an app to connect current students searching for co-ops 
+    with students who have already completed one.
 
     The goal of this demo is to provide information on the tech stack 
     being used as well as demo some of the features of the various platforms. 

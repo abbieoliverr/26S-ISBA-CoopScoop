@@ -70,11 +70,24 @@ def classification_nav():
 def admin_home_nav():
     st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
 
+def user_base_nav():
+    st.sidebar.page_link("pages/21_User_Base.py", label="User Database", icon="👥")
 
-def ml_model_mgmt_nav():
-    st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
-    )
+def integrity_dashboard_nav():
+    st.sidebar.page_link("pages/22_Integrity_Dashboard.py", label="Data Integrity Dashboard", icon="📊")
+
+def company_data_nav():
+    st.sidebar.page_link("pages/23_Company_Data.py", label="Company Data", icon="💼")
+
+def review_log_nav():
+    st.sidebar.page_link("pages/24_Review_Log.py", label="Review Log", icon="➕")
+
+def pending_reviews_nav():
+    st.sidebar.page_link("pages/25_Pending_Reviews.py", label="Pending Reviews", icon="⭐")
+
+def pending_updates_nav():
+    st.sidebar.page_link("pages/26_Pending_Updates.py", label="Pending Updates", icon="📈")
+
 
 # ---- Role: recruiter --------------------------------------------------------
 
@@ -167,7 +180,12 @@ def SideBarLinks(show_home=False):
 
         if st.session_state["role"] == "administrator":
             admin_home_nav()
-            ml_model_mgmt_nav()
+            user_base_nav()
+            integrity_dashboard_nav()
+            company_data_nav()
+            review_log_nav()
+            pending_reviews_nav()
+            pending_updates_nav()
 
         if st.session_state["role"] == "recruiter":
             recruiter_home_nav()

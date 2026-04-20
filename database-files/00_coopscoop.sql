@@ -94,6 +94,7 @@ CREATE TABLE Reviews (
     companyId INT NOT NULL,
     cycleId INT,
     adminId INT,
+    creationTime DATETIME DEFAULT NOW(),
     CONSTRAINT validRating CHECK (rating <= 5 AND rating >= 0),
     CONSTRAINT fk_review_student FOREIGN KEY (studentId) REFERENCES Students(studentId),
     CONSTRAINT fk_review_company FOREIGN KEY (companyId) REFERENCES Companies(companyId),
