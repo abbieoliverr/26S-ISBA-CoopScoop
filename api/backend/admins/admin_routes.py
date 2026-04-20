@@ -210,3 +210,129 @@ def update_review_status():
         return jsonify({"message": "Approval status updated"}), 200
     finally:
         cursor.close()
+
+
+@admins.route("/data/integritydb", methods=["GET"])
+def get_integrity_db():
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+    results = {}
+
+    # Queries
+
+    # student's status is searching but their co-op cycle isn't the current one
+    q1 = """
+        SELECT s.studentId, s.firstName, s.lastName, c.name as cycleName
+        FROM Students s
+        JOIN COOPCycle c ON s.cycleId = c.cycleId
+        WHERE s.searchStatus = 'Searching' AND c.current = FALSE
+    """
+
+    # a student received an offer but their application status isn't offered
+    q2 = """
+        SELECT o.offerId, o.studentId, a.status as appStatus
+        FROM Offers o
+        JOIN Applications a ON o.applicationId = a.applicationId
+        WHERE a.status != 'Offered'
+    """
+
+    # any of the users' first name or last name are null
+    q3 = """
+        SELECT 'Advisor' as type, advisorId as id 
+        FROM Advisors 
+        WHERE firstName IS NULL 
+           OR lastName IS NULL
+        UNION
+        SELECT 'Admin', adminId 
+        FROM Admins 
+        WHERE firstName IS NULL 
+           OR lastName IS NULL
+        UNION
+        SELECT 'Recruiter', recruiterId 
+        FROM Recruiters 
+        WHERE firstName IS NULL 
+           OR lastName IS NULL
+        UNION
+        SELECT 'Student', studentId 
+        FROM Students 
+        WHERE firstName IS NULL 
+           OR lastName IS NULL
+    """
+
+    # a student is searching for a co-op but has no advisor
+    q4 = """
+    SELECT studentId, firstName, lastName 
+    FROM Students 
+    WHERE searchStatus = 'Searching' 
+      AND advisorId IS NULL"""
+
+
+    # the time of last update is earlier than the time of creation
+    q5 = """
+        SELECT reviewId, creationTime, lastUpdated FROM Reviews 
+        WHERE creationTime > NOW() OR lastUpdated < creationTime
+    """
+
+    # something has been created but the user is suspended
+    q6 = """
+    SELECT 'Reviews' as entity, r.reviewId, u.userId
+    FROM Reviews r JOIN Students s ON r.studentId = s.studentId 
+    JOIN Users u ON s.userId = u.userId WHERE u.accountStatus = 'Suspended'
+    
+    UNION
+
+    SELECT 'Applications', a.applicationId, u.userId
+    FROM Applications a JOIN Students s ON a.studentId = s.studentId 
+    JOIN Users u ON s.userId = u.userId WHERE u.accountStatus = 'Suspended'
+    
+    UNION 
+
+    SELECT 'Offers', o.offerId, u.userId
+    FROM Offers o JOIN Students s ON o.studentId = s.studentId 
+    JOIN Users u ON s.userId = u.userId WHERE u.accountStatus = 'Suspended'
+
+    UNION 
+
+    SELECT 'Interviews', i.interviewId, u.userId 
+    FROM Interviews i JOIN Students s ON i.studentId = s.studentId 
+    JOIN Users u ON s.userId = u.userId WHERE u.accountStatus = 'Suspended'
+
+    UNION
+
+    SELECT 'Student Notes', n.noteId, u.userId
+    FROM Notes n JOIN Students s ON n.studentId = s.studentId 
+    JOIN Users u ON s.userId = u.userId WHERE u.accountStatus = 'Suspended'
+
+    UNION
+        
+    SELECT 'Advisor Notes', an.advisorNoteId, u.userId
+    FROM AdvisorNotes an JOIN Advisors adv ON an.advisorId = adv.advisorId 
+    JOIN Users u ON adv.userId = u.userId WHERE u.accountStatus = 'Suspended'
+
+    UNION
+        
+    SELECT 'Interview History', ih.interviewHistoryId, u.userId
+    FROM InterviewHistory ih JOIN Students s ON ih.studentId = s.studentId 
+    JOIN Users u ON s.userId = u.userId WHERE u.accountStatus = 'Suspended'
+"""
+
+    cursor.execute(q1)
+    results['invalid_search'] = cursor.fetchall()
+
+    cursor.execute(q2)
+    results['invalid_offer'] = cursor.fetchall()
+
+    cursor.execute(q3)
+    results['null_name'] = cursor.fetchall()
+
+    cursor.execute(q4)
+    results['unassigned_advisor'] = cursor.fetchall()
+
+    cursor.execute(q5)
+    results['time_mismatch'] = cursor.fetchall()
+
+    cursor.execute(q6)
+    results['suspended_activity'] = cursor.fetchall()
+
+    cursor.close()
+    return jsonify(results), 200

@@ -39,7 +39,7 @@ CREATE TABLE Recruiters (
     userId INT NOT NULL,
     firstName VARCHAR(100),
     lastName VARCHAR(100),
-    companyId INT,
+    companyId INT NOT NULL,
     CONSTRAINT fk_user_recruiters FOREIGN KEY (userId) REFERENCES Users(userId),
     CONSTRAINT fk_recruiter_company FOREIGN KEY (companyId) REFERENCES Companies(companyId)
 );
@@ -58,7 +58,7 @@ CREATE TABLE Students (
     phoneNumber VARCHAR(20),
     linkedInLink VARCHAR(255),
     optedIn BOOLEAN DEFAULT TRUE,
-    cycleId INT,
+    cycleId INT NOT NULL,
     advisorId INT,
     searchStatus ENUM('Searching', 'Accepted Offer', 'Completed') DEFAULT 'Searching',
     CONSTRAINT fk_user_students FOREIGN KEY (userId) REFERENCES Users(userId),
