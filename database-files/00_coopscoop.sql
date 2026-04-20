@@ -102,17 +102,6 @@ CREATE TABLE Reviews (
     CONSTRAINT fk_review_admin FOREIGN KEY (adminId) REFERENCES Admins(adminId)
 );
 
-CREATE TABLE Updates (
-    updateId INT AUTO_INCREMENT PRIMARY KEY,
-    newContent TEXT,
-    approvalStatus ENUM('Approved', 'Rejected', 'Pending') DEFAULT 'Pending',
-    timeOfPosting DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    reviewId INT NOT NULL,
-    studentId INT NOT NULL,
-    CONSTRAINT fk_update_review FOREIGN KEY (reviewId) REFERENCES Reviews(reviewId),
-    CONSTRAINT fk_update_student FOREIGN KEY (studentId) REFERENCES Students(studentId)
-);
- 
 CREATE TABLE Listings (
     listingId INT AUTO_INCREMENT PRIMARY KEY,
     positionTitle VARCHAR(255),

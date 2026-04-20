@@ -28,7 +28,6 @@ services:
       - ./api/.env
     image: mysql:9
     container_name: mysql_db
-    hostname: db
     volumes:
       - "./database-files:/docker-entrypoint-initdb.d/:ro"
       - "mysql_data:/var/lib/mysql"

@@ -55,27 +55,4 @@ VALUES
     ('Solid experience. Learned a ton about SQL. The team was super supportive, though the pay could be better.', 4, 'Mobile Dev Intern', TRUE, 'Approved', 104, 113, 12, 13),
     ('Loved it here! Everyone was so smart and willing to help. Definitely felt like a valued member of the team.', 3, 'Data Science Co-op', FALSE, 'Approved', 64, 54, 8, 8);
 
-INSERT INTO Updates (newContent, approvalStatus, reviewId, studentId)
-VALUES
-    ('Amazing culture and the mentorship was top tier. Highly recommend applying if you like fast-paced environments and ownership over your projects.', 'Approved', 4, 7),
-    ('Great intro to the industry. Managed to push code to production in my first month and worked extensively with CI/CD pipelines.', 'Pending', 33, 111),
-    ('Good place to learn but the workload is pretty heavy. It can be hard to maintain work-life balance during the sprint cycles.', 'Pending', 47, 18),
-    ('Good place to learn but the workload is pretty heavy. It can be hard to maintain work-life balance during the sprint cycles.', 'Approved', 23, 80),
-    ('Decent co-op. A bit slow at first but got to work on some cool features by the end. The free snacks and hybrid flexibility were a plus.', 'Approved', 39, 61),
-    ('Great intro to the industry. Managed to push code to production in my first month and worked extensively with CI/CD pipelines.', 'Pending', 2, 101),
-    ('Solid experience. Learned a ton about React and AWS. The team was super supportive and the pay was actually quite competitive for the area.', 'Pending', 33, 111),
-    ('Good place to learn but the workload is pretty heavy. It can be hard to maintain work-life balance during the sprint cycles.', 'Pending', 14, 113),
-    ('Loved it here! Everyone was so smart and willing to help. I felt like a valued member of the team from day one. Would highly recommend to other students.', 'Pending', 45, 84),
-    ('Never do this internship seriously it was terrible.', 'Rejected', 21, 74),
-    ('Tough interview process but totally worth it. The office in Boston is awesome and the commute is very manageable.', 'Approved', 24, 83),
-    ('Felt a bit lost at first because my manager was busy, but the senior devs stepped in and the other interns were great resources.', 'Approved', 49, 104),
-    ('It was okay. A lot of legacy code and meetings, but I definitely leveled up my debugging and testing skills during the second half of the term.', 'Approved', 31, 57),
-    ('The internship was mostly remote which was nice, but I found it easier to get help once I started going into the office twice a week.', 'Approved', 22, 77),
-    ('Amazing culture and the mentorship was top tier. Highly recommend applying if you like fast-paced environments and ownership over your projects.', 'Approved', 36, 73),
-    ('It was okay. A lot of legacy code and meetings, but I definitely leveled up my debugging and testing skills during the second half of the term.', 'Approved', 50, 64),
-    ('Good place to learn but the workload is pretty heavy. It can be hard to maintain work-life balance during the sprint cycles.', 'Pending', 30, 15),
-    ('The internship was mostly remote which was nice, but I found it easier to get help once I started going into the office twice a week.', 'Approved', 31, 57),
-    ('Great intro to the industry. Managed to push code to production in my first month and worked extensively with CI/CD pipelines.', 'Pending', 30, 15),
-    ('Decent co-op. A bit slow at first but got to work on some cool features by the end. The free snacks and hybrid flexibility were a plus.', 'Pending', 47, 18);
-
 SET FOREIGN_KEY_CHECKS = 1;

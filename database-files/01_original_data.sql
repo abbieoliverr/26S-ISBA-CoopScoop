@@ -6,7 +6,6 @@ TRUNCATE TABLE Interviews;
 TRUNCATE TABLE Offers;
 TRUNCATE TABLE Applications;
 TRUNCATE TABLE Listings;
-TRUNCATE TABLE Updates;
 TRUNCATE TABLE Reviews;
 TRUNCATE TABLE AdvisorNotes;
 TRUNCATE TABLE Notes;
@@ -69,10 +68,6 @@ INSERT INTO Reviews (content, rating, position, studentId, companyId, cycleId, a
 ('Great mentorship and real project work!', 4, 'Software Engineer Co-op', 1, 1, 1, 1),
 ('Very bureaucratic, limited learning opportunities.', 2, 'Data Analyst Co-op', 2, 2, 2, 1),
 ('Friendly team, good work-life balance.', 5, 'Compliance Co-op', 1, 2, 2, 1);
-
-INSERT INTO Updates (newContent, approvalStatus, timeOfPosting, reviewId, studentId) VALUES
-('Great mentorship and real project work!', 'Pending', NOW(), 1, 1),
-('Very bureaucratic, limited learning opportunities.', 'Pending', NOW(), 2, 2);
 
 INSERT INTO Listings (positionTitle, description, skillsRequired, location, salary, companyId, cycleId) VALUES
 ('Software Engineer Co-op', 'Build internal tools', 'Python, SQL', 'Boston, MA', 25, 1, 1),

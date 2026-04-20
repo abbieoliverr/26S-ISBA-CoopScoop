@@ -9,6 +9,7 @@ from backend.ngos.ngo_routes import ngos
 from backend.students.student_routes import students
 from backend.recruiter.recruiter_routes import recruiters
 from backend.advisor.advisor_routes import advisor
+from backend.admins.admin_routes import admins
 
 def create_app():
     app = Flask(__name__)
@@ -42,5 +43,6 @@ def create_app():
     app.register_blueprint(students, url_prefix="/s")
     app.register_blueprint(recruiters, url_prefix='/recruiters')
     app.register_blueprint(advisor, url_prefix='/advisor')
+    app.register_blueprint(admins, url_prefix='/admins')
 
     return app
