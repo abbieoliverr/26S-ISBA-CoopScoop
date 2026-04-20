@@ -171,6 +171,4 @@ CREATE TABLE InterviewHistory (
     CONSTRAINT fk_history_student FOREIGN KEY (studentId) REFERENCES Students(studentId)
 );
 
-CREATE TABLE Coop (
 
-)

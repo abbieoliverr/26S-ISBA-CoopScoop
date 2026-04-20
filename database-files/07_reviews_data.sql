@@ -1,5 +1,7 @@
 USE `Coop-Scoop`;
 
+SET FOREIGN_KEY_CHECKS = 0;
+
 INSERT INTO Reviews (content, rating, position, anonymous, approval, studentId, companyId, cycleId, adminId)
 VALUES
     ('Tough interview process but worth it. The office in Boston is awesome.', 3, 'Backend Engineering Co-op', FALSE, 'Approved', 91, 140, 10, 12),
@@ -75,3 +77,5 @@ VALUES
     ('The internship was mostly remote which was nice, but I found it easier to get help once I started going into the office twice a week.', 'Approved', 31, 57),
     ('Great intro to the industry. Managed to push code to production in my first month and worked extensively with CI/CD pipelines.', 'Pending', 30, 15),
     ('Decent co-op. A bit slow at first but got to work on some cool features by the end. The free snacks and hybrid flexibility were a plus.', 'Pending', 47, 18);
+
+SET FOREIGN_KEY_CHECKS = 1;

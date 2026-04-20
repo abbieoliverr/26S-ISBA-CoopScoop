@@ -88,4 +88,14 @@ if st.button('Act as Fawn Font, a Student',
     st.session_state['role'] = 'student'
     st.session_state['first_name'] = 'Fawn'
     st.session_state['student_id'] = 1
-    st.switch_page('pages/50_Student_Home.py') 
+    st.switch_page('pages/50_Student_Home.py')
+
+if st.button('Act as Dingleford McThunderfunk, a Co-Op Advisor',
+             type='primary',
+             use_container_width=True):
+    st.session_state['authenticated'] = True
+    st.session_state['role'] = 'advisor'
+    st.session_state['first_name'] = 'Dingleford'
+    st.session_state['advisor_id'] = 1
+    logger.info("Logging in as Co-Op Advisor Persona")
+    st.switch_page('pages/30_Advisor_Home.py')

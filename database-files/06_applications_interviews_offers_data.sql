@@ -1,5 +1,7 @@
 USE `Coop-Scoop`;
 
+SET FOREIGN_KEY_CHECKS = 0;
+
 insert into Applications (status, deadline, listingId, studentId) values ('Pending', '2026-02-14', 3, 2);
 insert into Applications (status, deadline, listingId, studentId) values ('Interviewing', '2026-01-30', 17, 1);
 insert into Applications (status, deadline, listingId, studentId) values ('Offered', '2026-03-08', 7, 2);
@@ -218,3 +220,5 @@ VALUES
     ('Data Science Co-op', '1. L1 vs L2 2. vanishing gradient 3. precision vs recall', 79, NULL, 63),
     ('Mobile Dev Intern', 'lifecycle | ios memory | objc vs swift. pretty standard.', 113, 48, 104),
     ('Data Science Co-op', 'bias vs variance, explain p-values to a business person.', 54, NULL, 64);
+
+SET FOREIGN_KEY_CHECKS = 1;

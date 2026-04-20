@@ -105,6 +105,32 @@ def student_apps_nav():
 def student_listings_nav():
     st.sidebar.page_link("pages/53_student_listing.py", label="Browse Listings", icon="🔍")
 
+
+# ---- Role: advisor ----------------------------------------------------------
+
+def advisor_home_nav():
+    st.sidebar.page_link("pages/30_Advisor_Home.py", label="Advisor Home", icon="🏠")
+
+
+def advisor_roster_nav():
+    st.sidebar.page_link("pages/30_Advisor_Roster.py", label="Student Roster", icon="👥")
+
+
+def advisor_student_profile_nav():
+    st.sidebar.page_link("pages/31_Advisor_Student_Profile.py", label="Student Profile", icon="👤")
+
+
+def advisor_cohort_stats_nav():
+    st.sidebar.page_link("pages/32_Advisor_Cohort_Stats.py", label="Cohort Stats", icon="📊")
+
+
+def AdvisorHomeLinks():
+    advisor_home_nav()
+    advisor_roster_nav()
+    advisor_student_profile_nav()
+    advisor_cohort_stats_nav()
+
+
 # ---- Sidebar assembly -------------------------------------------------------
 
 def SideBarLinks(show_home=False):
@@ -154,6 +180,9 @@ def SideBarLinks(show_home=False):
             student_reviews_nav()
             student_apps_nav()
             student_listings_nav()
+
+        if st.session_state["role"] == "advisor":
+            AdvisorHomeLinks()
 
     # About link appears at the bottom for all roles
     about_page_nav()
