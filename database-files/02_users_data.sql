@@ -1,4 +1,4 @@
-USE `Coop-Scoop`;
+USE coop_scoop;
 
 INSERT IGNORE INTO Users (userId, password, email, accountStatus)
 VALUES

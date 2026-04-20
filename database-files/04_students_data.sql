@@ -1,4 +1,4 @@
-USE `Coop-Scoop`;
+USE coop_scoop;
 
 INSERT INTO COOPCycle (name, current)
 VALUES

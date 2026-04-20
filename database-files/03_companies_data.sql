@@ -1,4 +1,4 @@
-USE `Coop-Scoop`;
+USE coop_scoop;
 
 INSERT INTO Companies (companyName, location, website, searching)
 VALUES

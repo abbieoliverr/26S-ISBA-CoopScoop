@@ -1,4 +1,4 @@
-USE `Coop-Scoop`;
+USE coop_scoop;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
