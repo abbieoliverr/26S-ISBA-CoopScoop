@@ -85,9 +85,6 @@ def review_log_nav():
 def pending_reviews_nav():
     st.sidebar.page_link("pages/25_Pending_Reviews.py", label="Pending Reviews", icon="⭐")
 
-def pending_updates_nav():
-    st.sidebar.page_link("pages/26_Pending_Updates.py", label="Pending Updates", icon="📈")
-
 
 # ---- Role: recruiter --------------------------------------------------------
 

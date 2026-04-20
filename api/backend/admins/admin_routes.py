@@ -87,3 +87,30 @@ def sync_reviews():
         return jsonify({"error": str(e)}), 500
     finally:
         cursor.close()
+
+
+
+
+@admins.route("/reviews/log", methods=["GET"])
+def get_review_logs():
+    start = request.args.get('start')
+    end = request.args.get('end')
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+    try:
+        query = """
+                    SELECT r.reviewId, r.creationTime, r.content, r.lastUpdated,
+                           r.anonymous, c.companyName, s.firstName, s.lastName
+                    FROM Reviews r
+                             JOIN Companies c ON r.companyId = c.companyId
+                             JOIN Students s ON r.studentId = s.studentId
+                    WHERE r.creationTime BETWEEN %s AND %s
+                    ORDER BY r.creationTime DESC 
+                    """
+        cursor.execute(query, (start, end))
+        logs = cursor.fetchall()
+        return jsonify(logs), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()

@@ -63,9 +63,5 @@ if response.status_code == 200:
         c5.write(name)
         c6.write(r['userId'])
         c7.markdown(f":{a_color}[{r['accountStatus']}]")
-
-
-
-        st.markdown("<hr style='margin:0; padding:0; opacity:0.2'>", unsafe_allow_html=True)
 else:
     st.error("Data unavailable.")
