@@ -19,7 +19,15 @@ if response.status_code == 200:
     if data:
         df = pd.DataFrame(data)
         df.columns = [str(col).lower() for col in df.columns]
-        st.write(df.columns.tolist())
+
+        numeric_cols = [
+            'totalapplicants', 'totaloffers', 'totalrejected',
+            'ininterview', 'acceptanceratepct', 'avgdaystointerview'
+        ]
+
+        for col in numeric_cols:
+            if col in df.columns:
+                df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
 
         total_applicants = df['totalapplicants'].sum()
         total_offers = df['totaloffers'].sum()
