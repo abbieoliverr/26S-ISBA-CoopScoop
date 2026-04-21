@@ -206,4 +206,7 @@ def get_hiring_analytics(company_id):
         ''',
         (company_id,)
     )
-    return make_response(jsonify(cursor.fetchall()), 200)
+    columns = [desc[0] for desc in cursor.description]
+    rows = cursor.fetchall()
+    result = [dict(zip(columns, row)) for row in rows]
+    return make_response(jsonify(result), 200)
