@@ -19,6 +19,7 @@ if response.status_code == 200:
     if data:
         df = pd.DataFrame(data)
         df.columns = [str(col).lower() for col in df.columns]
+        st.write(df.columns.tolist())
 
         total_applicants = df['totalapplicants'].sum()
         total_offers = df['totaloffers'].sum()
