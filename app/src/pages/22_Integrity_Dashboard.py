@@ -44,13 +44,13 @@ try:
                 st.table(data['invalid_offer'])
 
         with tab_users:
-            st.subheader("Missing Profile Info")
+            st.subheader("Missing first name or last name (or both)")
             if data['null_name']:
                 st.dataframe(data['null_name'], use_container_width=True)
 
             if data['unassigned_advisor']:
-                st.warning("Students searching with no assigned Advisor")
-                st.write(data['unassigned_advisor'])
+                st.subheader("Not assigned an advisor")
+                st.dataframe(data['unassigned_advisor'], use_container_width=True)
 
         with tab_security:
             st.subheader("Suspended User Actions")
