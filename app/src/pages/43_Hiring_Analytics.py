@@ -19,10 +19,9 @@ if response.status_code == 200:
     if data:
         df = pd.DataFrame(data)
         df.columns = [str(col).lower() for col in df.columns]
-        st.write(df.columns.tolist())
 
-        total_applicants = df['totalapplicants'].sum()
-        total_offers = df['totaloffers'].sum()
+        total_applicants = int(df['totalapplicants'].sum())
+        total_offers = int(df['totaloffers'].sum())
         overall_rate = round((total_offers / total_applicants * 100), 1) if total_applicants > 0 else 0
         active_positions = len(df)
 
