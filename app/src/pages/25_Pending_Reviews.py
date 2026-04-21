@@ -45,13 +45,13 @@ try:
                 with c5:
                     if st.button("Approve", key=f"app_{r['reviewId']}"):
                         res = requests.put(f"http://api:4000/admins/reviews/{r['reviewId']}/status",
-                                         json={"status": "approved"})
+                                         json={"status": "Approved"})
                         if res.status_code == 200:
                             st.rerun()
                 with c6:
                     if st.button("Reject", key=f"rej_{r['reviewId']}"):
                         res = requests.put(f"http://api:4000/admins/reviews/{r['reviewId']}/status",
-                                         json={"status": "rejected"})
+                                         json={"status": "Rejected"})
                         if res.status_code == 200:
                             st.rerun()
                 st.divider()

@@ -194,9 +194,8 @@ def get_pending_reviews():
     return jsonify(pending), 200
 
 @admins.route("/reviews/<int:review_id>/status", methods=["PUT"])
-def update_review_status():
+def update_review_status(review_id):
     status = request.json.get('status')
-    reviewId = request.view_args['reviewId']
     db = get_db()
     cursor = db.cursor()
     try:
@@ -205,9 +204,11 @@ def update_review_status():
             SET approval = %s 
             WHERE reviewId = %s
         """
-        cursor.execute(query, (status, reviewId))
+        cursor.execute(query, (status, review_id))
         db.commit()
         return jsonify({"message": "Approval status updated"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
     finally:
         cursor.close()
 
